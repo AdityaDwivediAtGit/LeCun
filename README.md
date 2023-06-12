@@ -1,6 +1,6 @@
 # LeCun
 
-Predict the classification of wether the new customer will purchase the car based on social network ad dataset using K nearest Neighbour.
+Predict the classification of whether the new customer will purchase the car based on social network ad dataset using K nearest Neighbour.
 
 ## Table of Contents
 
@@ -15,7 +15,7 @@ Predict the classification of wether the new customer will purchase the car base
 - Aditya Dwivedi - CDEA
 - Swaraj Pal - DPE
 - Vikas Shahu - DSE
-- Sahil Mankar - CDEA
+- Sahil Mankar - DPE
 
 ## Problem Statement
 
