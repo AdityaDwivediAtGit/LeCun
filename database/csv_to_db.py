@@ -17,7 +17,7 @@ conn.commit()
 
 #Importing csv to db
 import csv
-with open('Social_Network_Ads.csv', 'r') as file:
+with open('database/Social_Network_Ads.csv', 'r') as file:
     csv_reader = csv.reader(file)
     next(csv_reader)  # Skip the header row if it exists
     for row in csv_reader:
