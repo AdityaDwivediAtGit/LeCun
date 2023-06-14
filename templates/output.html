@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Output Page</title>
+</head>
+<body>
+    <h1>Output Page</h1>
+    <p>Age: {{ age }}</p>
+    <p>Salary: {{ salary }}</p>
+    <p>Prediction: {{ prediction }}</p>
+    <h3 style="color : green"> {{ data_saved }} </h3>
+    
+    <form action="/output" method="POST">
+        <input type="hidden" name="age" value="{{ age }}">
+        <input type="hidden" name="salary" value="{{ salary }}">
+        <input type="hidden" name="prediction" value="{{ prediction }}">
+        <input type="hidden" name="nearest_customers" value="{{ nearest_customers }}">
+        <input type="hidden" name="data_saved" value="{{ data_saved }}">
+        <button id="yes" name="button_id" value="yes">YES</button>
+        <button id="no" name="button_id" value="no">NO</button>
+    </form>
+    
+    <h2>Nearest Customers:</h2>
+    <ul>
+        {% for customer in nearest_customers %}
+        <li>Age: {{ customer[0] }}, Salary: {{ customer[1] }}, Purchased: {{ customer[2]}}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

@@ -1,0 +1,5 @@
+# Ignore the virtual environment folder
+.env1/
+
+# Ignore the SQLite database file
+car_prediction.db
