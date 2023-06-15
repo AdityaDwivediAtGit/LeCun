@@ -2,14 +2,64 @@
 <html>
 <head>
     <title>Output Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        p {
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin-bottom: 20px;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        h3.success {
+            color: green;
+        }
+    </style>
 </head>
 <body>
     <h1>Output Page</h1>
     <p>Age: {{ age }}</p>
     <p>Salary: {{ salary }}</p>
     <p>Prediction: {{ prediction }}</p>
-    <h3 style="color : green"> {{ data_saved }} </h3>
-    
+    <h3 class="success">{{ data_saved }}</h3>
+
     <form action="/output" method="POST">
         <input type="hidden" name="age" value="{{ age }}">
         <input type="hidden" name="salary" value="{{ salary }}">
@@ -19,11 +69,11 @@
         <button id="yes" name="button_id" value="yes">YES</button>
         <button id="no" name="button_id" value="no">NO</button>
     </form>
-    
+
     <h2>Nearest Customers:</h2>
     <ul>
         {% for customer in nearest_customers %}
-        <li>Age: {{ customer[0] }}, Salary: {{ customer[1] }}, Purchased: {{ customer[2]}}</li>
+        <li>Age: {{ customer[0] }}, Salary: {{ customer[1] }}, Purchased: {{ customer[2] }}</li>
         {% endfor %}
     </ul>
 </body>
