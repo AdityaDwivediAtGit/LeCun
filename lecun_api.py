@@ -15,7 +15,11 @@ from model import knn
 
 """## Flask"""
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/', methods=["GET"])
+def homepage():
+    return render_template('homepage.html')
+
+@app.route('/input', methods=['GET', 'POST'])
 def input_page():
     global prediction
     global nearest_customers
@@ -34,7 +38,6 @@ def output_page():
     global prediction
     global nearest_customers
     global chance_of_buying
-
     age = int(request.form['age'])
     salary = int(request.form['salary'])
     
