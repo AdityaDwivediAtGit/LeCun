@@ -50,8 +50,9 @@ def output_page():
         purchase = 1 if button_id == 'yes' else 0
         # Update the purchase status in the database
         cursor.execute('INSERT INTO customers (Age, EstimatedSalary, Purchased) VALUES (?, ?, ?)', (age, salary, purchase))
-        conn.commit()   
+        conn.commit()
 
+    conn.close()
 
     return render_template('output.html', age=age, salary=salary, prediction=prediction+",\t"+str(chance_of_buying*100)+"% chances of buying", nearest_customers=nearest_customers, data_saved = "Data Saved to DB")
 

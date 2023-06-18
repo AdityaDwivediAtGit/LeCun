@@ -26,3 +26,4 @@ with open('database/Social_Network_Ads.csv', 'r') as file:
         purchased = int(row[2])
         cursor.execute('INSERT INTO customers (Age, EstimatedSalary, Purchased) VALUES (?, ?, ?)', (age, salary, purchased))
 conn.commit()
+conn.close()
