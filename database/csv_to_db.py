@@ -11,6 +11,11 @@ cursor.execute('''
         Purchased INTEGER
     )
 ''')
+cursor.execute('''CREATE TABLE IF NOT EXISTS Users(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    username TEXT UNIQUE NOT NULL,
+    passwordHash TEXT NOT NULL 
+)''')
 conn.commit()
 
 """## Importing csv to database (One time Process)"""
