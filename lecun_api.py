@@ -64,23 +64,24 @@ def output_page():
     global prediction
     global nearest_customers
     global chance_of_buying
-    age = int(request.form['age'])
-    salary = int(request.form['salary'])
-    
-    ###### another thread for parallel operation (since flask performs parallel operations)
-    conn = sqlite3.connect('car_prediction.db')
-    cursor = conn.cursor()
 
     if request.method == 'POST':
+        age = int(request.form['age'])
+        salary = int(request.form['salary'])
+        
+        ###### another thread for parallel operation (since flask performs parallel operations)
+        conn = sqlite3.connect('car_prediction.db')
+        cursor = conn.cursor()
+
         button_id = request.form['button_id']
         purchase = 1 if button_id == 'yes' else 0
         # Update the purchase status in the database
         cursor.execute('INSERT INTO customers (Age, EstimatedSalary, Purchased) VALUES (?, ?, ?)', (age, salary, purchase))
         conn.commit()
-
-    conn.close()
-
-    return render_template('output.html', age=age, salary=salary, prediction=prediction+",\t"+str(chance_of_buying*100)+"% chances of buying", nearest_customers=nearest_customers, data_saved = "Data Saved to DB")
+        conn.close()
+        return render_template('output.html', age=age, salary=salary, prediction=prediction+",\t"+str(chance_of_buying*100)+"% chances of buying", nearest_customers=nearest_customers, data_saved = "Data Saved to DB")
+    else:
+        return "Please Login provide input first !"
 
 if __name__ == '__main__':
     app.run(debug = True, port = 5001)
