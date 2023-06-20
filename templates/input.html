@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>LeCun</title>
+    <title>LeCun Input</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -15,6 +15,11 @@
             color: #333;
         }
         
+        .username {
+            text-align: left;
+            color: #333;
+        }
+
         form {
             max-width: 400px;
             margin: 0 auto;
@@ -54,15 +59,22 @@
         }
     </style>
 </head>
+
 <body>
-    <h1>LeCun : Enter new customer details here: </h1>
+    <h1>LeCun: Enter new customer details here:</h1>
     <form action="/input" method="POST">
+        <h3 class="username">Welcome {{ username }} !</h3>
+        <button id="logout_id" name="logout_button_name" value="logout_clicked">LOGOUT</button>
+
+        <br>
+        <br>
+
         <label for="age">Age:</label>
         <input type="number" id="age" name="age" required><br><br>
         
         <label for="salary">Salary:</label>
         <input type="number" id="salary" name="salary" required><br><br>
-        
+
         <input type="submit" value="Submit">
     </form>
 </body>

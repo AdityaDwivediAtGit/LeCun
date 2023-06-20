@@ -3,39 +3,43 @@ app = Flask(__name__)
 
 import sqlite3
 
+"""Authenticator for Login and Signup"""
+import authenticator
+
 ## GLOBAL VARS
 prediction = 0
 nearest_customers = []
 chance_of_buying = 0
+authenticator_obj = authenticator.auth(app)
 
 
 """Rough KNN Model"""
 from model import knn
 
-"""Authenticator for Login and Signup"""
-import authenticator
-
 
 """## Flask"""
 @app.route('/signup', methods=["GET", "POST"])
 def signup_page():
+    global authenticator_obj
     if request.method == 'POST':
         username_received = request.form['username']
         password_received = request.form['password']
-        authenticator_obj = authenticator.auth()
         if authenticator_obj.SignUp(username_received, password_received):
             return render_template('login.html')
     return render_template('signup.html')
 
 @app.route('/login', methods=["GET", "POST"])
 def login_page():
+    global authenticator_obj
+    
+    if authenticator_obj.Is_already_logged_in()[0]: 
+        return render_template("input.html", username = authenticator_obj.Is_already_logged_in()[1])
+
     if request.method == 'POST':
         username_received = request.form['username']
         password_received = request.form['password']
-        # print(username_received, password_received)##############################################
-        authenticator_obj = authenticator.auth()
         if authenticator_obj.Login(username_received,password_received):
-            return render_template("input.html")
+            return render_template("input.html", username = username_received)
         else:
             return render_template('login.html', incorrect_pass="Username or password is incorrect")
     return render_template('login.html')
@@ -52,6 +56,12 @@ def input_page():
     global chance_of_buying
 
     if request.method == 'POST':
+        # if logout button is pressed
+        print(request.form)
+        if "logout_button_name" in request.form:
+            authenticator_obj.Logout()
+            return render_template('login.html', incorrect_pass="You're successfully logged out.")
+
         age = int(request.form['age'])
         salary = int(request.form['salary'])
         prediction, nearest_customers, chance_of_buying = knn(age, salary)
