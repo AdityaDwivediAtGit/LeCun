@@ -32,7 +32,7 @@ class auth:
     def Is_already_logged_in(self):
         return {"logged_in" : session.get('logged_in'), "username" : session.get('username')}
     
-    def create_cookie(self, username):
+    def create_session(self, username):
         session["username"] = username
         session['logged_in'] = True
     

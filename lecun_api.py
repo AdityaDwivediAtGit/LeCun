@@ -53,7 +53,7 @@ def verification_page():
         verification_code_received = int(request.form['verification_code_name'])
         print("/verify post", verification_code_received, verification_code) #############
         if verification_code_received == verification_code:
-            authenticator_obj.create_cookie(username = username)
+            authenticator_obj.create_session(username = username)
             return render_template("input.html", username = username)
     return render_template('login.html', incorrect_pass="Incorrect Verification Code !")
 
