@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, send_from_directory
 app = Flask(__name__)
 
 import sqlite3
@@ -6,11 +6,16 @@ import sqlite3
 """Authenticator for Login and Signup"""
 import authenticator
 
+"""Discord send verification message"""
+import random
+
 ## GLOBAL VARS
 prediction = 0
 nearest_customers = []
 chance_of_buying = 0
 authenticator_obj = authenticator.auth(app)
+verification_code = 0
+username = ""
 
 
 """Rough KNN Model"""
@@ -18,6 +23,14 @@ from model import knn
 
 
 """## Flask"""
+
+# HOSTING IMAGES
+@app.route('/images/<path:filename>')
+def get_image(filename):
+    return send_from_directory('static', filename)
+
+
+
 @app.route('/signup', methods=["GET", "POST"])
 def signup_page():
     global authenticator_obj
@@ -26,20 +39,50 @@ def signup_page():
         password_received = request.form['password']
         if authenticator_obj.SignUp(username_received, password_received):
             return render_template('login.html')
+        else:
+            return render_template('signup.html', err = "User already exists !")
     return render_template('signup.html')
+
+@app.route('/verify', methods=["GET", "POST"])
+def verification_page():
+    global authenticator_obj
+    global verification_code
+    global username
+
+    if request.method == 'POST':
+        verification_code_received = int(request.form['verification_code_name'])
+        print("/verify post", verification_code_received, verification_code) #############
+        if verification_code_received == verification_code:
+            authenticator_obj.create_cookie(username = username)
+            return render_template("input.html", username = username)
+    return render_template('login.html', incorrect_pass="Incorrect Verification Code !")
 
 @app.route('/login', methods=["GET", "POST"])
 def login_page():
     global authenticator_obj
+    global verification_code
+    global username
     
-    if authenticator_obj.Is_already_logged_in()[0]: 
-        return render_template("input.html", username = authenticator_obj.Is_already_logged_in()[1])
+    if authenticator_obj.Is_already_logged_in()["logged_in"]: 
+        return render_template("input.html", username = username)
 
     if request.method == 'POST':
         username_received = request.form['username']
+        username = username_received
         password_received = request.form['password']
         if authenticator_obj.Login(username_received,password_received):
-            return render_template("input.html", username = username_received)
+
+            # generate verification code
+            verification_code = random.randint(100000, 999999)
+
+            #send code
+            # temporary webhook, replace this from db later, every login has different webhook
+            f = open("webhook_url.txt", 'r')
+            webhook_url = f.read()
+            f.close()
+            if authenticator_obj.sent_discord_verification_message(discord_webhook_url = webhook_url, verification_code = verification_code):
+                # return render_template("input.html", username = username_received)
+                return render_template("verification.html")
         else:
             return render_template('login.html', incorrect_pass="Username or password is incorrect")
     return render_template('login.html')
@@ -62,6 +105,10 @@ def input_page():
             authenticator_obj.Logout()
             return render_template('login.html', incorrect_pass="You're successfully logged out.")
 
+        # if age or salary field is empty
+        if (not request.form['age']) or (not request.form['salary']):
+            return render_template('input.html', err="Enter Age and Salary.")
+        
         age = int(request.form['age'])
         salary = int(request.form['salary'])
         prediction, nearest_customers, chance_of_buying = knn(age, salary)

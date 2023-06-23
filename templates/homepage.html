@@ -9,23 +9,17 @@
             margin: 0;
             padding: 0;
             background-color: #f2f2f2;
+            background-image: url("/images/homepage_background.jpg");
+            background-size: cover;
         }
 
         .container {
-            width: 80%;
-            margin: 0 auto;
+            width: 50%;
+            margin-top: 3%;
+            margin-left: 23%;
             padding: 40px 20px;
+            align-self: center;
             text-align: center;
-            background-color: #ffffff;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .container_git {
-            width: 80%;
-            margin: 0 auto;
-            padding: 40px 20px;
-            text-align: left;
             background-color: #ffffff;
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -93,6 +87,34 @@
             font-family: Consolas, Monaco, Courier New, monospace;
             overflow-x: auto;
         }
+
+            /*FOOTER ANIMATION*/
+            @keyframes scaleAnimation {
+                0% {
+                    transform: scale(1);
+                }
+                50% {
+                    transform: scale(1.2);
+                }
+                100% {
+                    transform: scale(1);
+                }
+            }
+    
+        footer {
+            max-width: 400px;
+            top: 10%;
+            text-align: center;
+            margin-left: 37%;
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            animation: scaleAnimation 3s infinite ease-in-out;
+        }
+
+
+
     </style>
 </head>
 <body>
@@ -101,74 +123,22 @@
         <p>Make accurate predictions about whether a new customer will purchase a car based on their age and salary.</p>
         <a class="button" href="/login">Get Started</a>
     </div>
-
-    <div class="container_git">
-        <h1>LeCun</h1>
-        <p>Predict the classification of whether the new customer will purchase the car based on the social network ad dataset using K Nearest Neighbour.</p>
-
-        <h2>Table of Contents</h2>
-        <ul>
-            <li><a href="#team-members">Team Members</a></li>
-            <li><a href="#problem-statement">Problem Statement</a></li>
-            <li><a href="#project-tasks">Project Tasks</a></li>
-            <li><a href="#installation">Installation</a></li>
-            <li><a href="#usage">Usage</a></li>
-        </ul>
-
-        <h2 id="team-members">Team Members</h2>
-        <ul>
-            <li>Aditya Dwivedi - CDEA</li>
-            <li>Swaraj Pal - DPE</li>
-            <li>Vikas Shahu - DSE</li>
-            <li>Sahil Mankar - DPE</li>
-        </ul>
-
-        <h2 id="problem-statement">Problem Statement</h2>
-        <p>The goal of this project is to predict whether a new customer will purchase a car based on the social network ad dataset using the K Nearest Neighbors (KNN) algorithm. The dataset, provided as a CSV file, contains information such as age, estimated salary, and whether the customer made a purchase or not. The task is to build a model that can classify whether a new customer will purchase a car or not based on their age and salary.</p>
-
-        <h2 id="project-tasks">Project Tasks</h2>
-        <ul>
-            <li>Aditya Dwivedi (CDEA):
-                <ul>
-                    <li>Develop a Flask API to integrate the KNN model.</li>
-                    <li>Create endpoints to handle input and output data for new customers.</li>
-                    <li>Connect the API to a SQLite database for storing customer data.</li>
-                </ul>
-            </li>
-            <li>Swaraj Pal (DPE):
-                <ul>
-                    <li>[.....]</li>
-                </ul>
-            </li>
-            <li>Vikas Shahu (DSE):
-                <ul>
-                    <li>Build and train the KNN model using the social network ad dataset.</li>
-                    <li>Fine-tune the model and evaluate its performance.</li>
-                </ul>
-            </li>
-            <li>Sahil Mankar (DPE):
-                <ul>
-                    <li>[.....]</li>
-                </ul>
-            </li>
-        </ul>
-
-        <h2 id="installation">Installation</h2>
-        <p>To set up the project, follow these steps:</p>
-        <ol>
-            <li>Install the required Python libraries: <code>flask</code>, <code>sqlite3</code>, <code>csv</code>, <code>sklearn</code>. You can install them using pip:
-                <pre><code>pip install flask sqlite3 csv sklearn</code></pre>
-            </li>
-            <li>Run the <code>csv_to_db.py</code> script to create a SQLite database <code>car_prediction.db</code>. This script will create a database using the provided CSV file that will be used for the project.</li>
-        </ol>
-
-        <h2 id="usage">Usage</h2>
-        <p>To use the project, follow these steps:</p>
-        <ol>
-            <li>Ensure that the <code>car_prediction.db</code> database has been created by running the <code>csv_to_db.py</code> script.</li>
-            <li>Run the <code>lecun_api.py</code> script. This will start the Flask API and make the website accessible.</li>
-            <li>Open your web browser and navigate to <code>127.0.0.1:5001</code> to access the website. Here, you can input the age and salary of a new customer and get the predicted probability of the customer buying a car.</li>
-        </ol>
-    </div>
-    </body>
-    </html>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <footer>
+        <p>Made with ❤️ by Aditya Dwivedi <br> KONVERGE.AI 2023 BOOTCAMP <span class="animated-name"></span></p>
+    </footer>
+</body>
+</html>

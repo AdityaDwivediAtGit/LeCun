@@ -6,11 +6,14 @@
         body {
             font-family: Arial, sans-serif;
             background-color: #f2f2f2;
+            background-image: url("/images/signup_background.jpg");
+            background-size: cover;
         }
         
         .container {
             max-width: 400px;
-            margin: 0 auto;
+            margin-top: 16%;
+            margin-left: 20%;
             padding: 20px;
             background-color: #fff;
             border-radius: 5px;
@@ -60,6 +63,11 @@
             text-align: center;
             margin-top: 10px;
         }
+
+        .error {
+            color: red;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
@@ -73,6 +81,9 @@
             <input type="submit" value="Sign Up">
         </form>
         <p class="login-link">Already have an account? <a href="/login">Login!</a></p>
+        {% if err %}
+            <p class="error">{{ err }}</p>
+        {% endif %}
     </div>
 </body>
 </html>

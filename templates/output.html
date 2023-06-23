@@ -8,6 +8,51 @@
             background-color: #f2f2f2;
             margin: 0;
             padding: 20px;
+            background-image: url("/images/Output_background.jpg");
+            background-size: cover;
+            background-attachment: fixed;
+        }
+
+        .container {
+            display: flex;
+        }
+
+        .container_prediction {
+            max-width: 350px;
+            max-height: 200px;
+            margin-top: 5%;
+            margin-left: 5%;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            align-items: left;
+            flex: 1;
+        }
+
+        .container_save {
+            max-width: 410px;
+            max-height: 130px;
+            margin-top: 1%;
+            margin-left: 5%;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            align-items: left;
+            flex: 1;
+        }
+
+        .container_near {
+            max-width: 350px;
+            margin-top: 1%;
+            margin-left: 5%;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            align-self: right;
+            flex: 1;
         }
 
         h1 {
@@ -54,27 +99,35 @@
     </style>
 </head>
 <body>
-    <h1>Output Page</h1>
-    <p>Age: {{ age }}</p>
-    <p>Salary: {{ salary }}</p>
-    <p>Prediction: {{ prediction }}</p>
-    <h3 class="success">{{ data_saved }}</h3>
+    <div class="container">
+        <div class="container_prediction">
+            <h1>Output Page</h1>
+            <p>Age: {{ age }}</p>
+            <p>Salary: {{ salary }}</p>
+            <p>Prediction: {{ prediction }}</p>
+        </div>
 
-    <form action="/output" method="POST">
-        <input type="hidden" name="age" value="{{ age }}">
-        <input type="hidden" name="salary" value="{{ salary }}">
-        <input type="hidden" name="prediction" value="{{ prediction }}">
-        <input type="hidden" name="nearest_customers" value="{{ nearest_customers }}">
-        <input type="hidden" name="data_saved" value="{{ data_saved }}">
-        <button id="yes" name="button_id" value="yes">YES</button>
-        <button id="no" name="button_id" value="no">NO</button>
-    </form>
+        <div class="container_save">
+            <h3 class="success">{{ data_saved }}</h3>
+            <form action="/output" method="POST">
+                <input type="hidden" name="age" value="{{ age }}">
+                <input type="hidden" name="salary" value="{{ salary }}">
+                <input type="hidden" name="prediction" value="{{ prediction }}">
+                <input type="hidden" name="nearest_customers" value="{{ nearest_customers }}">
+                <input type="hidden" name="data_saved" value="{{ data_saved }}">
+                <button id="yes" name="button_id" value="yes">YES</button>
+                <button id="no" name="button_id" value="no">NO</button>
+            </form>
+        </div>
 
-    <h2>Nearest Customers:</h2>
-    <ul>
-        {% for customer in nearest_customers %}
-        <li>Age: {{ customer[0] }}, Salary: {{ customer[1] }}, Purchased: {{ customer[2] }}</li>
-        {% endfor %}
-    </ul>
+        <div class="container_near">
+            <h2>Nearest Customers:</h2>
+            <ul>
+                {% for customer in nearest_customers %}
+                <li>Age: {{ customer[0] }}, Salary: {{ customer[1] }}, Purchased: {{ customer[2] }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
 </body>
 </html>
